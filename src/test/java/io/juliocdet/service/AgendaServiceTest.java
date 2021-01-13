@@ -5,6 +5,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
+
 public class AgendaServiceTest {
 
     private AgendaService agendaService;
@@ -21,7 +23,9 @@ public class AgendaServiceTest {
 
     @Test
     public void limpiarAgenda_Test() {
+        // when
         agendaService.limpiarAgenda();
+        // Then
         Assert.assertTrue("Verificamos que la agenda este vacia tras limpiarla",
             agendaService.getContactos().isEmpty());
     }
@@ -40,7 +44,8 @@ public class AgendaServiceTest {
                 .build();
 
         Contacto contactoEncontrado = agendaService.findContacto("juan");
-        Assert.assertEquals("Verificamos que el contacto encontrado sea juan", juan, contactoEncontrado);
+        Assert.assertEquals("Verificamos que el contacto encontrado sea juan",
+                juan, contactoEncontrado);
     }
 
     @Test
@@ -51,13 +56,15 @@ public class AgendaServiceTest {
                 .build();
 
         Contacto contactoEncontrado = agendaService.findContacto("JUAN");
-        Assert.assertEquals("Verificamos que el contacto encontrado sea juan", juan, contactoEncontrado);
+        Assert.assertEquals("Verificamos que el contacto encontrado sea juan",
+                juan, contactoEncontrado);
     }
 
     @Test
     public void findContacto_nonFound_Test() {
         Contacto contactoEncontrado = agendaService.findContacto("jua");
-        Assert.assertNull("Verificamos que el no encontramos el contacto y obtenermos null", contactoEncontrado);
+        Assert.assertNull("Verificamos que el no encontramos el contacto y obtenermos null",
+                contactoEncontrado);
     }
 
     @Test
@@ -68,13 +75,14 @@ public class AgendaServiceTest {
                 .build();
 
         Contacto contactoEncontrado = agendaService.findContactoByNumber("321-654-987");
-        Assert.assertNotNull("Verificamos que el contacto no sea null", contactoEncontrado);
-        Assert.assertEquals("Verificamos que pancho sea el contacto encontrado", pancho, contactoEncontrado);
+        assertNotNull("Verificamos que el contacto no sea null", contactoEncontrado);
+        Assert.assertEquals("Verificamos que pancho sea el contacto encontrado",
+                pancho, contactoEncontrado);
     }
 
     @Test
     public void findContactoByNumber_nonFound_Test() {
         Contacto contactoEncontrado = agendaService.findContactoByNumber("222-222-222");
-        Assert.assertNull("Verificamos que el contacto sea null", contactoEncontrado);
+        Assert.assertNull(contactoEncontrado);
     }
 }
